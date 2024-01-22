@@ -70,10 +70,10 @@ releases, you can compile from source _(link coming soon)_.
 
 Docker images are distributed via [GitHub's Container registry](https://github.com/dstotijn/hetty/pkgs/container/hetty)
 and [Docker Hub](https://hub.docker.com/r/dstotijn/hetty). To run Hetty via with a volume for database and certificate
-storage, and port 8080 forwarded:
+storage, and port 8081 forwarded:
 
 ```
-docker run -v $HOME/.hetty:/root/.hetty -p 8080:8080 \
+docker run -v $HOME/.hetty:/root/.hetty -p 8081:8081 \
   ghcr.io/dstotijn/hetty:latest
 ```
 
@@ -102,7 +102,7 @@ Options:
     --cert         Path to root CA certificate. Creates file if it doesn't exist. (Default: "~/.hetty/hetty_cert.pem")
     --key          Path to root CA private key. Creates file if it doesn't exist. (Default: "~/.hetty/hetty_key.pem")
     --db           Database directory path. (Default: "~/.hetty/db")
-    --addr         TCP address for HTTP server to listen on, in the form \"host:port\". (Default: ":8080")
+    --addr         TCP address for HTTP server to listen on, in the form \"host:port\". (Default: ":8081")
     --chrome       Launch Chrome with proxy settings applied and certificate errors ignored. (Default: false)
     --verbose      Enable verbose logging.
     --json         Encode logs as JSON, instead of pretty/human readable output.

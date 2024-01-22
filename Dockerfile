@@ -27,4 +27,4 @@ COPY --from=go-builder /app/hetty .
 
 ENTRYPOINT ["./hetty"]
 
-EXPOSE 8080
+EXPOSE 8081

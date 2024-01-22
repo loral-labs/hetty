@@ -52,7 +52,7 @@ Options:
     --cert         Path to root CA certificate. Creates file if it doesn't exist. (Default: "~/.hetty/hetty_cert.pem")
     --key          Path to root CA private key. Creates file if it doesn't exist. (Default: "~/.hetty/hetty_key.pem")
     --db           Database directory path. (Default: "~/.hetty/db")
-    --addr         TCP address for HTTP server to listen on, in the form \"host:port\". (Default: ":8080")
+    --addr         TCP address for HTTP server to listen on, in the form \"host:port\". (Default: ":8081")
     --chrome       Launch Chrome with proxy settings applied and certificate errors ignored. (Default: false)
     --verbose      Enable verbose logging.
     --json         Encode logs as JSON, instead of pretty/human readable output.
@@ -90,7 +90,7 @@ func NewHettyCommand() (*ffcli.Command, *Config) {
 	fs.StringVar(&cmd.key, "key", "~/.hetty/hetty_key.pem",
 		"Path to root CA private key. Creates a new private key if file doesn't exist.")
 	fs.StringVar(&cmd.db, "db", "~/.hetty/db", "Database directory path.")
-	fs.StringVar(&cmd.addr, "addr", ":8080", "TCP address to listen on, in the form \"host:port\".")
+	fs.StringVar(&cmd.addr, "addr", ":8081", "TCP address to listen on, in the form \"host:port\".")
 	fs.BoolVar(&cmd.chrome, "chrome", false, "Launch Chrome with proxy settings applied and certificate errors ignored.")
 	fs.BoolVar(&cmd.version, "version", false, "Output version.")
 	fs.BoolVar(&cmd.version, "v", false, "Output version.")

@@ -176,6 +176,7 @@ func RequestIDFromContext(ctx context.Context) (ulid.ULID, bool) {
 // handleConnect hijacks the incoming HTTP request and sets up an HTTP tunnel.
 // During the TLS handshake with the client, we use the proxy's CA config to
 // create a certificate on-the-fly.
+// The Main Function
 func (p *Proxy) handleConnect(w http.ResponseWriter) {
 	hj, ok := w.(http.Hijacker)
 	if !ok {
