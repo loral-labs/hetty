@@ -212,6 +212,11 @@ func (p *Proxy) handleConnect(w http.ResponseWriter) {
 	clientConnNotify := ConnNotify{tlsConn, make(chan struct{})}
 	l := &OnceAcceptListener{clientConnNotify.Conn}
 
+	// print hello
+	p.logger.Infow("Client connected!.")
+	// print the incoming request
+	p.logger.Infow("Request from client: ", "request", tlsConn)
+
 	err = http.Serve(l, p)
 	if err != nil && !errors.Is(err, ErrAlreadyAccepted) {
 		p.logger.Errorw("Serving HTTP request failed.",
