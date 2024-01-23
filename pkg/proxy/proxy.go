@@ -90,6 +90,8 @@ func NewProxy(cfg Config) (*Proxy, error) {
 }
 
 func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	p.logger.Infow("Proxying request.", r.Header)
+
 	if r.Method == http.MethodConnect {
 		p.handleConnect(w)
 		return
@@ -176,7 +178,6 @@ func RequestIDFromContext(ctx context.Context) (ulid.ULID, bool) {
 // handleConnect hijacks the incoming HTTP request and sets up an HTTP tunnel.
 // During the TLS handshake with the client, we use the proxy's CA config to
 // create a certificate on-the-fly.
-// The Main Function
 func (p *Proxy) handleConnect(w http.ResponseWriter) {
 	hj, ok := w.(http.Hijacker)
 	if !ok {
@@ -211,11 +212,6 @@ func (p *Proxy) handleConnect(w http.ResponseWriter) {
 
 	clientConnNotify := ConnNotify{tlsConn, make(chan struct{})}
 	l := &OnceAcceptListener{clientConnNotify.Conn}
-
-	// print hello
-	p.logger.Infow("Client connected!.")
-	// print the incoming request
-	p.logger.Infow("Request from client: ", "request", tlsConn)
 
 	err = http.Serve(l, p)
 	if err != nil && !errors.Is(err, ErrAlreadyAccepted) {
